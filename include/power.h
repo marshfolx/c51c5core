@@ -1,4 +1,4 @@
-﻿
+
 #ifndef CCC_POWER_H
 #define CCC_POWER_H
 
@@ -10,16 +10,11 @@
 #include "io_x.h"
 #include "reg_x.h"
 
+#include "config.h"
+
 #ifndef F_CPU    //in Hz
 	#warning "F_CPU should be defined."
-    #define F_CPU (6000000)
-	//Choose one:
-	//#define F_CPU (3000000)     //3 Mhz
-	//#define F_CPU (6000000)     //6 Mhz
-	//#define F_CPU (11059200)    //11.0592 Mhz
-	//#define F_CPU (12000000)    //12 Mhz
-	//#define F_CPU (16000000)    //16 Mhz
-	//#define F_CPU (24000000)    //24 Mhz
+    #define F_CPU (12000000)
 #endif
 
 
@@ -57,7 +52,7 @@
 #endif
 
 
-#define enbale_double_uart0_speed() \
+#define enable_double_uart0_speed() \
 do { \
 	PCON |= SOMD; \
 } while(0)

@@ -47,8 +47,8 @@
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
           <OutputName>c51c5core</OutputName>
-          <CreateExecutable>0</CreateExecutable>
-          <CreateLib>1</CreateLib>
+          <CreateExecutable>1</CreateExecutable>
+          <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
@@ -347,7 +347,7 @@
             <WarningLevel>2</WarningLevel>
             <DataOverlaying>1</DataOverlaying>
             <OverlayString></OverlayString>
-            <MiscControls></MiscControls>
+            <MiscControls>REMOVEUNUSED</MiscControls>
             <DisableWarningNumbers></DisableWarningNumbers>
             <LinkerCmdFile></LinkerCmdFile>
             <Assign></Assign>
@@ -411,7 +411,7 @@
                   <MiscControls></MiscControls>
                   <Define></Define>
                   <Undefine></Undefine>
-                  <IncludePath>C:\Program Files\Keilv5\C51\INC</IncludePath>
+                  <IncludePath>.\include</IncludePath>
                 </VariousControls>
               </C51>
               <Ax51>
@@ -480,6 +480,16 @@
               <FileType>1</FileType>
               <FilePath>.\uart0.c</FilePath>
             </File>
+            <File>
+              <FileName>lcd1602_drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\lcd1602_drv.c</FilePath>
+            </File>
+            <File>
+              <FileName>test-main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\test-main.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -534,6 +544,11 @@
               <FileName>annex.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\include\annex.h</FilePath>
+            </File>
+            <File>
+              <FileName>config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\include\config.h</FilePath>
             </File>
           </Files>
         </Group>

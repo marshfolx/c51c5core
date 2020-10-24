@@ -31,25 +31,40 @@ enum _t1_mode {
 };
 typedef enum _t1_mode t1_mode;
 
-//these three functions can not be replaced by macro,
-//otherwise the intellisense to enum arguments wont work.
 
 //set mode, meanwhile clear gate control.
-static inline void t0_set_mode(t0_mode m) {
-	TMOD &= ~(T0_CT | T0_M1 | T0_M0 | T0_GATE);
-	TMOD |= (uint8_t)(m);
-}
+#ifdef  __VSCODE_C51__    //VSCODE keil assistant macro
+	extern void t0_set_mode(t0_mode m);    //dummy decleration to make intellisense work
+#else
+	#define t0_set_mode(m) \
+	do { \
+		TMOD &= 0xf0;\
+		TMOD |= (uint8_t)(m); \
+	} while(0)
+#endif  //__VSCODE_C51__
+
 
 //set mode, meanwhile clear gate control.
-static inline void t1_set_mode(t1_mode m) {
-	TMOD &= ~(T1_CT | T1_M1 | T1_M0 | T1_GATE);
-	TMOD |= (uint8_t)(m);
-}
+#ifdef __VSCODE_C51__
+	extern void t1_set_mode(t1_mode m);    //dummy decleration to make intellisense work
+#else
+	#define t1_set_mode(m) \
+	do { \
+		TMOD &= 0x0f; \
+		TMOD |= (uint8_t)(m); \
+	} while(0)
+#endif  //__VSCODE_C51__
+
 
 //set mode for both t0/ t1, meanwhile clear gate control.
-static inline void t01_set_tmod(t0_mode m0, t1_mode m1) {
-	TMOD = (uint8_t)m0 | (uint8_t)m1;
-}
+#ifdef __VSCODE_C51__
+	extern void t01_set_tmod(t0_mode m0, t1_mode m1);    //dummy decleration to make intellisense work
+#else
+	#define t01_set_tmod(m0, m1) \
+	do { \
+		TMOD = (uint8_t)m0 | (uint8_t)m1; \
+	} while(0)
+#endif  //__VSCODE_C51__
 
 
 //refer to data sheet to see what the gate control actually is.

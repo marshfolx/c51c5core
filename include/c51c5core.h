@@ -16,7 +16,7 @@
 *  5. IO            : INT0, INT1;
 *
 *  6. ROM space        : enough to waste;
-*  7. RAM space        : 256 byte idata at least;
+*  7. RAM space        : 256 byte at least;
 *  8. System frequency : fast enough for inefficient code;
 *  
 *  and is compatible with <REG51.h>

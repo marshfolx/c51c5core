@@ -3,27 +3,40 @@
 
 //#include "8051inc_error_hide.h"
 #include "io_x.h"
-#include "power.h"
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
+//REN is set by default.
 enum _uart0_mode {
-	fixed_8_bit = 0x00,    //fixed baud rate = F_sys / 12
-	fixed_9_bit = 0x80,    //fixed baud rate = Fsys / 128 or Fsys / 32 (speed doubled)
-	variable_8_bit = 0x40, //variable baud rate = F_ovf_T1 
-	variable_9_bit = 0xc0, //variable baud rate = F_ovf_T1
+	uart0_fixed_8_bit = 0x10,    //fixed baud rate = F_sys / 12
+	uart0_fixed_9_bit = 0x90,    //fixed baud rate = Fsys / 128 or Fsys / 32 (speed doubled)
+	uart0_variable_8_bit = 0x50, //variable baud rate = F_ovf_T1 
+	uart0_variable_9_bit = 0xd0, //variable baud rate = F_ovf_T1
 };
 typedef enum _uart0_mode uart0_mode;
 
 
-static inline void uart0_set_mode(uart0_mode m) {
-	SCON &= 0x3f;
-	SCON |= m;  //when m is fixed_8_bit (0), this line is waste.
-}
+#ifdef  __VSCODE_C51__
+	extern void uart0_set_mode(uart0_mode m);
+#else
+	#define uart0_set_mode(m) \
+	do { \
+		SCON &= 0x3f; \
+		SCON |= m;  /*when m is fixed_8_bit (0), this line is waste.*/ \
+	} while(0)
+#endif  //__VSCODE_C51__
 
 
-//start UART at variable baud rate mode.
-//Start Timer1 at 8bit auto reload mode and set baud rate at 9600.
-//the default implementation in uart0.c assumes that the clock frequency of timer1 equals to F_sys, no other prescaler.
-extern void uart0_beat_9k6();
+//Start UART at variable baud rate mode.
+//Start Timer1 at 8-bit auto reload mode and set baud rate at 9600 or 9k6.
+//The default implementation in uart0.c assumes that the clock frequency of timer1 equals to F_SYS.
+//The init value of Timer1 is calculated as (256 - F_CPU / 12 / 32 / 9600).
+//SMOD bit in PCON can double this frequency to 19200 or 19k2.
+extern void uart0_start_9k6();
 
 
 #define uart0_enable_multi() \
@@ -61,5 +74,9 @@ do { \
 	ES = 0; \
 } while(0)
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  //!__UART0__H__
