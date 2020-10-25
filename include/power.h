@@ -13,13 +13,12 @@
 #include "config.h"
 
 #ifndef F_CPU    //in Hz
-	#warning "F_CPU should be defined."
-    #define F_CPU (12000000)
+	#error "F_CPU should be defined."
 #endif
 
 
 #ifndef SYS_CLK_DIV_12
-	#warning "SYS_CLK_DIV_12 should be defined either (0) -> false (default) or (1) -> true"
+	#error "SYS_CLK_DIV_12 should be defined either (0) -> false (default) or (1) -> true"
 #endif
 
 //if the CPU clock is 12 divided from cpu clock source (traditional 8051 style).

@@ -1,9 +1,20 @@
 
-#ifndef __CONFIG__H__
-#define __CONFIG__H__
+#ifndef __CCC_CONFIG__H__
+#define __CCC_CONFIG__H__
 
 
 #include "io_x.h"
+
+#ifdef __CCC_CONFIG_EXTEND__
+	/* if __CCC_CONFIG_EXTEND__ defined, this config file will try to include another config.h file outside this repo folder,
+	*  thus all the configurations can be replaced without directly modifing this file.
+	*  __CCC_CONFIG_EXTEND__ should be set as compiler predefined flag to affect all compile module.
+	*  The replacing config.h should use other flag as include guard rather than this __CCC_CONFIG__H__.
+	*/
+
+	#include "../../include/config.h"
+
+#else
 
 
 /*! \file
@@ -43,7 +54,6 @@
 #define LCD_1602_EN (P3^4)
 
 
+#endif
 
-
-
-#endif  //!__CONFIG__H__
+#endif  //!__CCC_CONFIG__H__
